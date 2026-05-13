@@ -1,62 +1,82 @@
-/* =========================
-   script.js (chat moderno inteligente)
-========================= */
+// =========================
+// script.js
+// =========================
 
 const respostas = {
-  "o que é ia": "IA é uma tecnologia que simula inteligência humana, aprendendo com dados e tomando decisões.",
-  "ia e emprego": "A IA automatiza tarefas, mas também cria novas profissões tecnológicas.",
-  "produtividade": "A IA aumenta produtividade automatizando processos e reduzindo erros.",
-  "automação": "Automação usa tecnologia para executar tarefas sozinha.",
-  "profissões": "As profissões do futuro envolvem tecnologia, dados e IA."
+  "o que é ia": "A Inteligência Artificial é uma tecnologia capaz de simular capacidades humanas como aprendizado e tomada de decisões.",
+
+  "ia e emprego": "A IA automatiza tarefas repetitivas, mas também cria novas profissões tecnológicas.",
+
+  "produtividade": "A IA aumenta a produtividade automatizando processos e reduzindo erros.",
+
+  "automação": "Automação é o uso de tecnologia para executar tarefas automaticamente.",
+
+  "profissões do futuro": "As profissões do futuro envolvem tecnologia, dados e IA.",
+
+  "machine learning": "Machine Learning é uma área da IA onde sistemas aprendem com dados.",
+
+  "deep learning": "Deep Learning usa redes neurais para reconhecer padrões complexos.",
+
+  "ética na ia": "A ética na IA envolve uso responsável da tecnologia e proteção de dados.",
+
+  "ia na saúde": "A IA ajuda em diagnósticos, exames e monitoramento de pacientes.",
+
+  "ia nas empresas": "As empresas usam IA para automatizar processos e melhorar produtividade.",
+
+  "chatbot": "Chatbots são sistemas que conversam automaticamente com pessoas.",
+
+  "mercado de trabalho": "O mercado de trabalho está sendo transformado pela tecnologia.",
+
+  "tecnologia": "A tecnologia está presente em todas as áreas da sociedade moderna."
 };
 
 const extras = [
-  "Quer que eu explique mais simples?",
-  "Posso aprofundar isso pra você.",
-  "Esse tema é muito importante hoje.",
-  "Isso está ligado ao futuro do trabalho."
+  "Posso explicar melhor se quiser.",
+  "Esse é um tema importante.",
+  "Isso está ligado ao futuro do trabalho.",
+  "Quer uma explicação mais simples?"
 ];
 
-const chat = document.getElementById("chatBox");
-const input = document.getElementById("userInput");
-const typing = document.getElementById("typing");
+const chatBox = document.getElementById("chatBox");
+const userInput = document.getElementById("userInput");
 
-function addMsg(text, type) {
+function adicionarMensagem(texto, tipo) {
   const div = document.createElement("div");
-  div.className = "msg " + type;
-  div.innerText = text;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
+  div.classList.add("message", tipo);
+  div.innerText = texto;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function getResp(msg) {
-  msg = msg.toLowerCase();
+function buscarResposta(pergunta) {
+  const texto = pergunta.toLowerCase();
 
-  for (let k in respostas) {
-    if (msg.includes(k)) {
-      return respostas[k] + " " + extras[Math.floor(Math.random()*extras.length)];
+  for (let chave in respostas) {
+    if (texto.includes(chave)) {
+      return respostas[chave] + " " + extras[Math.floor(Math.random() * extras.length)];
     }
   }
 
-  return "Ainda não sei isso, mas posso falar sobre IA, emprego, tecnologia e produtividade.";
+  return "Ainda não tenho uma resposta para isso, mas posso falar sobre IA, emprego, produtividade e tecnologia.";
 }
 
-function send() {
-  if (!input.value) return;
+function enviarMensagem() {
+  const pergunta = userInput.value.trim();
+  if (!pergunta) return;
 
-  addMsg(input.value, "user");
-
-  typing.style.display = "block";
+  adicionarMensagem(pergunta, "user-message");
 
   setTimeout(() => {
-    typing.style.display = "none";
-    addMsg(getResp(input.value), "bot");
-  }, 900);
+    adicionarMensagem(buscarResposta(pergunta), "bot-message");
+  }, 500);
 
-  input.value = "";
+  userInput.value = "";
 }
 
-input.addEventListener("keypress", e => {
-  if (e.key === "Enter") send();
-});
+function preencherPergunta(texto) {
+  userInput.value = texto;
+}
 
+userInput.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") enviarMensagem();
+});

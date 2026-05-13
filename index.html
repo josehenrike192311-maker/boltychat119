@@ -1,45 +1,43 @@
-/* =========================
-   index.html (Chat moderno estilo WhatsApp / ChatGPT)
-========================= */
+<!-- ========================= -->
+<!-- index.html -->
+<!-- ========================= -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bolty IA</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bolty Chatbot</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="app">
+  <div class="chat-container">
 
-    <!-- HEADER estilo WhatsApp -->
-    <div class="header">
-      <div class="avatar">🤖</div>
-      <div class="header-info">
-        <h1>Bolty</h1>
-        <span>online • IA especializada</span>
+    <div class="chat-header">
+      <h1>Bolty</h1>
+      <p>Especialista em Inteligência Artificial, emprego, produtividade e tecnologia</p>
+    </div>
+
+    <div class="chat-box" id="chatBox">
+      <div class="message bot-message">
+        Olá! Eu sou o Bolty 🤖<br><br>
+        Pergunte sobre IA, emprego, produtividade, automação, tecnologia e futuro do trabalho.
       </div>
     </div>
 
-    <!-- CHAT AREA -->
-    <div class="chat" id="chatBox">
-
-      <div class="msg bot">
-        👋 Olá! Eu sou o Bolty.
-        Pergunte sobre IA, emprego, produtividade e tecnologia.
-      </div>
-
+    <div class="chat-input-area">
+      <input type="text" id="userInput" placeholder="Digite sua pergunta...">
+      <button onclick="enviarMensagem()">Enviar</button>
     </div>
 
-    <!-- TYPING INDICATOR -->
-    <div class="typing" id="typing">Bolty está digitando...</div>
-
-    <!-- INPUT -->
-    <div class="input-area">
-      <input id="userInput" placeholder="Mensagem..." />
-      <button onclick="send()">➤</button>
+    <div class="suggestions">
+      <button onclick="preencherPergunta('O que é IA?')">O que é IA?</button>
+      <button onclick="preencherPergunta('IA e emprego')">IA e emprego</button>
+      <button onclick="preencherPergunta('Produtividade')">Produtividade</button>
+      <button onclick="preencherPergunta('Automação')">Automação</button>
+      <button onclick="preencherPergunta('Profissões do futuro')">Profissões</button>
+      <button onclick="preencherPergunta('Machine Learning')">Machine Learning</button>
     </div>
 
   </div>

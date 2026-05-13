@@ -1,121 +1,62 @@
-/* ========================= */
-/* style.css */
-/* ========================= */
+/* =========================
+   script.js (chat moderno inteligente)
+========================= */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+const respostas = {
+  "o que é ia": "IA é uma tecnologia que simula inteligência humana, aprendendo com dados e tomando decisões.",
+  "ia e emprego": "A IA automatiza tarefas, mas também cria novas profissões tecnológicas.",
+  "produtividade": "A IA aumenta produtividade automatizando processos e reduzindo erros.",
+  "automação": "Automação usa tecnologia para executar tarefas sozinha.",
+  "profissões": "As profissões do futuro envolvem tecnologia, dados e IA."
+};
+
+const extras = [
+  "Quer que eu explique mais simples?",
+  "Posso aprofundar isso pra você.",
+  "Esse tema é muito importante hoje.",
+  "Isso está ligado ao futuro do trabalho."
+];
+
+const chat = document.getElementById("chatBox");
+const input = document.getElementById("userInput");
+const typing = document.getElementById("typing");
+
+function addMsg(text, type) {
+  const div = document.createElement("div");
+  div.className = "msg " + type;
+  div.innerText = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
 }
 
-body {
-  background: #f1f1f1;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+function getResp(msg) {
+  msg = msg.toLowerCase();
+
+  for (let k in respostas) {
+    if (msg.includes(k)) {
+      return respostas[k] + " " + extras[Math.floor(Math.random()*extras.length)];
+    }
+  }
+
+  return "Ainda não sei isso, mas posso falar sobre IA, emprego, tecnologia e produtividade.";
 }
 
-.chat-container {
-  width: 100%;
-  max-width: 750px;
-  background: white;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+function send() {
+  if (!input.value) return;
+
+  addMsg(input.value, "user");
+
+  typing.style.display = "block";
+
+  setTimeout(() => {
+    typing.style.display = "none";
+    addMsg(getResp(input.value), "bot");
+  }, 900);
+
+  input.value = "";
 }
 
-.chat-header {
-  background: black;
-  color: white;
-  padding: 25px;
-}
+input.addEventListener("keypress", e => {
+  if (e.key === "Enter") send();
+});
 
-.chat-header h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
-.chat-header p {
-  color: #ccc;
-  line-height: 1.5;
-}
-
-.chat-box {
-  height: 500px;
-  overflow-y: auto;
-  background: #fafafa;
-  padding: 20px;
-}
-
-.message {
-  max-width: 80%;
-  padding: 14px 18px;
-  border-radius: 18px;
-  margin-bottom: 15px;
-  line-height: 1.6;
-}
-
-.bot-message {
-  background: white;
-  border: 1px solid #ddd;
-}
-
-.user-message {
-  background: black;
-  color: white;
-  margin-left: auto;
-}
-
-.chat-input-area {
-  display: flex;
-  gap: 10px;
-  padding: 20px;
-  border-top: 1px solid #ddd;
-}
-
-.chat-input-area input {
-  flex: 1;
-  padding: 15px;
-  border-radius: 15px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
-
-.chat-input-area button {
-  background: black;
-  color: white;
-  border: none;
-  padding: 15px 25px;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.chat-input-area button:hover {
-  transform: scale(1.05);
-}
-
-.suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 20px;
-  background: #f5f5f5;
-}
-
-.suggestions button {
-  border: 1px solid #ccc;
-  background: white;
-  padding: 10px 15px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.suggestions button:hover {
-  background: black;
-  color: white;
-}

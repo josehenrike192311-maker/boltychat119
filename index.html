@@ -1,55 +1,45 @@
-<!-- ========================= -->
-<!-- index.html -->
-<!-- ========================= -->
+/* =========================
+   index.html (Chat moderno estilo WhatsApp / ChatGPT)
+========================= */
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bolty Chatbot</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bolty IA</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="chat-container">
+  <div class="app">
 
-    <div class="chat-header">
-      <h1>Bolty</h1>
-      <p>
-        Especialista em Inteligência Artificial, produtividade,
-        tecnologia, automação e mercado de trabalho.
-      </p>
-    </div>
-
-    <div class="chat-box" id="chatBox">
-      <div class="message bot-message">
-        Olá! Eu sou Bolty 🤖<br><br>
-        Posso responder perguntas sobre:
-        Inteligência Artificial, produtividade,
-        emprego, automação, empresas,
-        tecnologia e profissões do futuro.
+    <!-- HEADER estilo WhatsApp -->
+    <div class="header">
+      <div class="avatar">🤖</div>
+      <div class="header-info">
+        <h1>Bolty</h1>
+        <span>online • IA especializada</span>
       </div>
     </div>
 
-    <div class="chat-input-area">
-      <input
-        type="text"
-        id="userInput"
-        placeholder="Digite sua pergunta..."
-      >
+    <!-- CHAT AREA -->
+    <div class="chat" id="chatBox">
 
-      <button onclick="enviarMensagem()">
-        Enviar
-      </button>
+      <div class="msg bot">
+        👋 Olá! Eu sou o Bolty.
+        Pergunte sobre IA, emprego, produtividade e tecnologia.
+      </div>
+
     </div>
 
-    <div class="suggestions">
-      <button onclick="usarPergunta('O que é IA?')">O que é IA?</button>
-      <button onclick="usarPergunta('IA e emprego')">IA e emprego</button>
-      <button onclick="usarPergunta('Produtividade')">Produtividade</button>
-      <button onclick="usarPergunta('Automação')">Automação</button>
-      <button onclick="usarPergunta('Profissões do futuro')">Profissões</button>
-      <button onclick="usarPergunta('Machine Learning')">Machine Learning</button>
+    <!-- TYPING INDICATOR -->
+    <div class="typing" id="typing">Bolty está digitando...</div>
+
+    <!-- INPUT -->
+    <div class="input-area">
+      <input id="userInput" placeholder="Mensagem..." />
+      <button onclick="send()">➤</button>
     </div>
 
   </div>

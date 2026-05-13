@@ -1,97 +1,122 @@
-// =========================
-// script.js
-// =========================
+/* =========================
+   style.css (estilo WhatsApp / ChatGPT)
+========================= */
 
-const respostas = {
-  "o que é ia": "A Inteligência Artificial é uma tecnologia criada para simular capacidades humanas como aprendizado, interpretação de informações e tomada de decisões. Hoje ela está presente em aplicativos, bancos, hospitais, redes sociais e empresas.",
-
-  "ia e emprego": "A IA pode substituir tarefas repetitivas, mas também cria novas profissões ligadas à tecnologia, programação, automação e análise de dados.",
-
-  "produtividade": "A IA aumenta a produtividade automatizando tarefas, reduzindo erros e acelerando processos empresariais.",
-
-  "automação": "Automação é o uso de sistemas inteligentes e softwares para realizar tarefas automaticamente com pouca intervenção humana.",
-
-  "profissões do futuro": "As profissões do futuro estarão ligadas à tecnologia, segurança digital, programação, inteligência artificial e análise de dados.",
-
-  "machine learning": "Machine Learning é uma área da IA onde sistemas aprendem automaticamente através de dados e experiências.",
-
-  "deep learning": "Deep Learning utiliza redes neurais artificiais inspiradas no cérebro humano para reconhecer padrões complexos.",
-
-  "ética na ia": "A ética na IA envolve privacidade de dados, transparência dos algoritmos e uso responsável da tecnologia.",
-
-  "ia na saúde": "Na saúde, a IA ajuda em diagnósticos, análise de exames e monitoramento de pacientes.",
-
-  "ia nas empresas": "As empresas utilizam IA para automatizar processos, reduzir custos e melhorar produtividade.",
-
-  "chatbot": "Chatbots são sistemas inteligentes capazes de conversar automaticamente com pessoas utilizando IA.",
-
-  "mercado de trabalho": "O mercado de trabalho está sendo transformado pela tecnologia e exige profissionais mais adaptáveis e qualificados.",
-
-  "tecnologia": "A tecnologia transformou a comunicação, educação, trabalho e praticamente todas as áreas da sociedade moderna."
-};
-
-const respostasExtras = [
-  "Posso aprofundar mais esse assunto se quiser.",
-  "Esse tema é muito importante atualmente.",
-  "A IA vem transformando diversas áreas da sociedade.",
-  "Esse assunto está ligado ao futuro da tecnologia.",
-  "Posso explicar isso de forma mais simples também."
-];
-
-const chatBox = document.getElementById("chatBox");
-const userInput = document.getElementById("userInput");
-
-function adicionarMensagem(texto, tipo) {
-  const mensagem = document.createElement("div");
-
-  mensagem.classList.add("message");
-  mensagem.classList.add(tipo);
-
-  mensagem.innerHTML = texto;
-
-  chatBox.appendChild(mensagem);
-
-  chatBox.scrollTop = chatBox.scrollHeight;
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b141a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-function buscarResposta(pergunta) {
-  const texto = pergunta.toLowerCase();
-
-  for (let chave in respostas) {
-    if (texto.includes(chave)) {
-      const fraseExtra = respostasExtras[
-        Math.floor(Math.random() * respostasExtras.length)
-      ];
-
-      return respostas[chave] + " " + fraseExtra;
-    }
-  }
-
-  return "Ainda não tenho uma resposta exata para isso, mas posso falar sobre Inteligência Artificial, produtividade, emprego, automação, empresas, tecnologia e profissões do futuro.";
+.app {
+  width: 100%;
+  max-width: 420px;
+  height: 90vh;
+  background: #111b21;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
-function enviarMensagem() {
-  const pergunta = userInput.value.trim();
-
-  if (pergunta === "") return;
-
-  adicionarMensagem(pergunta, "user-message");
-
-  const resposta = buscarResposta(pergunta);
-
-  setTimeout(() => {
-    adicionarMensagem(resposta, "bot-message");
-  }, 500);
-
-  userInput.value = "";
+/* HEADER */
+.header {
+  background: #202c33;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
 }
 
-function usarPergunta(texto) {
-  userInput.value = texto;
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: #00a884;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
 }
 
-userInput.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    enviarMensagem();
-  }
-});
+.header-info h1 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.header-info span {
+  font-size: 12px;
+  color: #aebac1;
+}
+
+/* CHAT */
+.chat {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.msg {
+  max-width: 80%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.bot {
+  background: #202c33;
+  color: white;
+  align-self: flex-start;
+  border-top-left-radius: 0;
+}
+
+.user {
+  background: #005c4b;
+  color: white;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+}
+
+/* TYPING */
+.typing {
+  display: none;
+  font-size: 12px;
+  color: #aebac1;
+  padding: 5px 10px;
+}
+
+/* INPUT */
+.input-area {
+  display: flex;
+  padding: 10px;
+  background: #202c33;
+  gap: 8px;
+}
+
+.input-area input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  outline: none;
+  background: #111b21;
+  color: white;
+}
+
+.input-area button {
+  background: #00a884;
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
